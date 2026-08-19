@@ -1,17 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { styles } from "./styles";
 
 export default function Home() {
   return (
-    <View>
-      <Text style={style.meuTexto}>Olá Mundo!</Text>
-      <Text>Bem Vindo Pedro!</Text>
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Image
+          source={require("../assets/images/logo.png")}
+          style={styles.logo}
+          resizeMode='contain'
+        />
+        <Text style={styles.titulo}>TaskFlow</Text>
+        <Text style={styles.descricao}>Organize suas tarefas de forma simples</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
-const style = StyleSheet.create({
-  meuTexto: {
-    color: "red",
-    fontSize: 20,
-  },
-});
+
