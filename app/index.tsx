@@ -1,6 +1,8 @@
+import Botao from "@/components/Botao";
+import Titulo from "@/components/Titulo";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./styles";
 
@@ -11,10 +13,6 @@ export default function Home() {
     setIniciado(true);
     router.push("/tarefas");
   }
-  function configuracoes() {
-    setIniciado(true);
-    router.push("/configuracoes");
-  }
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -24,7 +22,7 @@ export default function Home() {
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.titulo}>TaskFlow</Text>
+          <Titulo texto="TaskFlow" />
 
           {iniciado ? (
             <Text style={styles.descricao}>Bem vindo as TaskFlow!</Text>
@@ -34,27 +32,10 @@ export default function Home() {
             </Text>
           )}
 
-          <Pressable
+          <Botao
+            texto={iniciado ? "Continuar" : "Começar"}
             onPress={iniciarAplicacao}
-            style={({ pressed }) => [
-              styles.botao,
-              pressed && styles.botaoPressionado,
-            ]}
-          >
-            <Text style={styles.textoBotao}>
-              {iniciado ? "Continuar" : "Começar"}
-            </Text>
-          </Pressable>
-
-          <Pressable
-            onPress={configuracoes}
-            style={({ pressed }) => [
-              styles.botao,
-              pressed && styles.botaoPressionado,
-            ]}
-          >
-            <Text style={styles.textoBotao}>Configurações</Text>
-          </Pressable>
+          />
         </View>
       </View>
     </SafeAreaView>

@@ -1,27 +1,27 @@
+import Botao from "@/components/Botao";
 import { router } from "expo-router";
-import { useState } from "react";
-import { Button, Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "./styles";
 
 export default function Tarefas() {
-  const [iniciado, setIniciado] = useState(false);
-  function configuracoes() {
-    setIniciado(true);
-    router.push("/configuracoes");
+  function voltarInicio() {
+    router.dismissAll();
+    router.push("/");
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Minhas Tarefas</Text>
-      <Pressable
-        onPress={configuracoes}
-        style={({ pressed }) => [
-          styles.botao,
-          pressed && styles.botaoPressionado,
-        ]}
-      >
-        <Text style={styles.textoBotao}>Configurações</Text>
-      </Pressable>
-      <Button title="Voltar" onPress={router.back} />
+      <Botao texto="Voltar" onPress={router.back} />
+
+      <Botao
+        texto="Configurações"
+        onPress={() => router.push("/configuracoes")}
+      />
+
+      <Botao texto="INICIO" onPress={voltarInicio} />
+
+      <Botao texto="Excluir" onPress={voltarInicio} cor="#c42626ff" />
     </View>
   );
 }
