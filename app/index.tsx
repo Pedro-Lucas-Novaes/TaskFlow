@@ -1,4 +1,5 @@
 import Botao from "@/components/Botao";
+import Card from "@/components/Card";
 import Titulo from "@/components/Titulo";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -16,12 +17,13 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <View style={styles.card}>
+        <Card>
           <Image
             source={require("../assets/images/logo.png")}
             style={styles.logo}
             resizeMode="contain"
           />
+
           <Titulo texto="TaskFlow" />
 
           {iniciado ? (
@@ -36,7 +38,7 @@ export default function Home() {
             texto={iniciado ? "Continuar" : "Começar"}
             onPress={iniciarAplicacao}
           />
-        </View>
+        </Card>
       </View>
     </SafeAreaView>
   );
