@@ -1,7 +1,7 @@
 import Botao from "@/components/Botao";
 import { router } from "expo-router";
 import { Text, View } from "react-native";
-import { styles } from "./styles";
+import { styles } from "../styles/global";
 
 export default function Configuracoes() {
   return (

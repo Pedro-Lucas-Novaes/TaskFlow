@@ -5,14 +5,14 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "./styles";
+import { styles } from "../styles/global";
 
 export default function Home() {
   const [iniciado, setIniciado] = useState(false);
 
   function iniciarAplicacao() {
     setIniciado(true);
-    router.push("/tarefas");
+    router.push("./tarefas/tarefas");
   }
   return (
     <SafeAreaView style={styles.safeArea}>
