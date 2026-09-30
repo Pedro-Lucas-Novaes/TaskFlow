@@ -3,16 +3,16 @@ import { Pressable, StyleSheet, Text } from "react-native";
 interface BotaoProps {
   texto: string;
   onPress: () => void;
-  cor?: string
+  cor?: string;
 }
 
-export default function Botao({ texto, onPress, cor="#2563eb" }: BotaoProps) {
+export default function Botao({ texto, onPress, cor = "#2563EB" }: BotaoProps) {
   return (
     <Pressable
       style={({ pressed }) => [
         styles.botao,
         pressed && styles.botaoPressionado,
-        {backgroundColor: cor}
+        { backgroundColor: cor },
       ]}
       onPress={onPress}
     >
@@ -23,15 +23,14 @@ export default function Botao({ texto, onPress, cor="#2563eb" }: BotaoProps) {
 
 const styles = StyleSheet.create({
   botao: {
-    paddingVertical: 15,
-    paddingHorizontal: 40,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 10,
   },
   texto: {
-    color: "#fff",
+    color: "#FFF",
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
   },
   botaoPressionado: {
     opacity: 0.8,
