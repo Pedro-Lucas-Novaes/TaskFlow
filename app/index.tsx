@@ -1,18 +1,18 @@
 import Botao from "@/components/Botao";
 import Card from "@/components/Card";
 import Titulo from "@/components/Titulo";
+import { styles } from "@/styles/global";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "../styles/global";
 
 export default function Home() {
   const [iniciado, setIniciado] = useState(false);
 
   function iniciarAplicacao() {
     setIniciado(true);
-    router.push("./tarefas/tarefas");
+    router.push("/tarefas/tarefas");
   }
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -39,6 +39,10 @@ export default function Home() {
             onPress={iniciarAplicacao}
           />
         </Card>
+        <Botao
+          texto="Exercícios"
+          onPress={() => router.push("/atividades/atividades")}
+        />
       </View>
     </SafeAreaView>
   );

@@ -17,7 +17,7 @@ export async function salvarUsuario(user: any) {
     const dados = JSON.stringify(user);
     await AsyncStorage.setItem(CHAVE_USER, dados);
   } catch (error) {
-    console.error("Erro ao salvar o usuario: ", error);
+    console.error("Erro ao salvar o usuário: ", error);
   }
 }
 
@@ -32,7 +32,6 @@ export async function carregarTarefas() {
     console.error("Erro ao carregar as tarefas: ", error);
   }
 }
-
 export async function carregarUsuario() {
   try {
     const dados = await AsyncStorage.getItem(CHAVE_USER);
@@ -41,7 +40,7 @@ export async function carregarUsuario() {
     }
     return JSON.parse(dados);
   } catch (error) {
-    console.error("Erro ao carregar o usuario: ", error);
+    console.error("Erro ao carregar o usuário: ", error);
   }
 }
 
