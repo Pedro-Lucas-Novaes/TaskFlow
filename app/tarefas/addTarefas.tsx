@@ -1,5 +1,5 @@
 import Botao from "@/components/Botao";
-import { carregarTarefas, salvarTarefas } from "@/utils/armazenamento";
+import { criarTarefas } from "@/services/tarefas";
 import { Picker } from "@react-native-picker/picker";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -24,17 +24,13 @@ export default function AddTarefas() {
     }
 
     const novaTarefa = {
-      id: Date.now().toString(),
       titulo: titulo.trim(),
       descricao: descricao.trim(),
       prioridade: prioridade.trim(),
+      concluida: false,
     };
 
-    const tarefas = await carregarTarefas();
-
-    const novaLista = [...tarefas, novaTarefa];
-
-    await salvarTarefas(novaLista);
+    await criarTarefas(novaTarefa);
 
     Alert.alert("Sucesso!", "Validação ok, dados salvos com sucesso!");
     router.replace("/tarefas/tarefas");
@@ -68,9 +64,9 @@ export default function AddTarefas() {
           onValueChange={(texto) => setPrioridade(texto)}
         >
           <Picker.Item label="Selecione..." value="" />
-          <Picker.Item label="Selecione" value="Baixa" />
-          <Picker.Item label="Selecione" value="Media" />
-          <Picker.Item label="Selecione" value="Alta" />
+          <Picker.Item label="Baixa" value="Baixa" />
+          <Picker.Item label="Media" value="Media" />
+          <Picker.Item label="Alta" value="Alta" />
         </Picker>
       </View>
 
