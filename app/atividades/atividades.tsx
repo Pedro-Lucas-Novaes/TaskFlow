@@ -1,48 +1,62 @@
-import Botao from "@/components/Botao";
-import { router } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import Card from "@/components/Card";
+import Titulo from "@/components/Titulo";
+import { styles } from "@/styles/global";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const exercicios = [
-  {
-    nome: "Ex da Aula 10",
-    rota: "/atividades/ex_aula10",
-  },
-  {
-    nome: "Ex Fetch",
-    rota: "/atividades/ex_fetch",
-  },
-  {
-    nome: "Ex Axios",
-    rota: "/atividades/ex_axios",
-  },
-  {
-    nome: "Ex catalogo",
-    rota: "/atividades/ex_catalogo",
-  },
-] as const;
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+};
 
-export default function atividades() {
-  return (
-    <View style={styles.container}>
-      {exercicios.map((exercicio) => {
-        return (
-          <Botao
-            key={exercicio.rota}
-            texto={exercicio.nome}
-            onPress={() => router.push(exercicio.rota)}
-          />
+export default function Atividades() {
+  const [post, setPost] = useState<Post | null>(null);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState(false);
+
+  useEffect(() => {
+    async function carregarPost() {
+      try {
+        const resposta = await axios.get<Post>(
+          "https://jsonplaceholder.typicode.com/posts/1",
         );
-      })}
-    </View>
+
+        setPost(resposta.data);
+      } catch (error) {
+        setErro(true);
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    carregarPost();
+  }, []);
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Card>
+          <Titulo texto="Publicação" />
+
+          {carregando ? (
+            <>
+              <ActivityIndicator size="large" color="#007bff" />
+              <Text style={styles.descricao}>Carregando publicação...</Text>
+            </>
+          ) : erro ? (
+            <Text style={styles.descricao}>Erro ao carregar a publicação!</Text>
+          ) : (
+            <>
+              <Text style={styles.descricao}>{post?.title}</Text>
+
+              <Text style={styles.descricao}>{post?.body}</Text>
+            </>
+          )}
+        </Card>
+      </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-    padding: 10,
-  },
-});
